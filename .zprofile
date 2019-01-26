@@ -68,7 +68,7 @@ export GPG_TTY SSH_AUTH_SOCK
 # Go development
 export GOPATH="${HOME}/dev/go"
 export PATH="$PATH:${GOPATH}/bin"
-if ! command -v brew --prefix golang >/dev/null 2>&1; then
+if command -v brew --prefix golang >/dev/null 2>&1; then
   export GOROOT="$(brew --prefix golang)/libexec"
   export PATH="$PATH:${GOROOT}/bin"
 fi

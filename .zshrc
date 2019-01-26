@@ -86,6 +86,6 @@ export PATH="/usr/local/opt/openssl/bin:$PATH"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+test -e "${HOME}/.asdf/asf.sh" && source $HOME/.asdf/asdf.sh
+test -e "$HOME/.asdf/completions/asdf.bash" &&. $HOME/.asdf/completions/asdf.bash
 
