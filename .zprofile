@@ -67,9 +67,14 @@ export GPG_TTY SSH_AUTH_SOCK
 
 # Go development
 export GOPATH="${HOME}/dev/go"
-export GOROOT="$(brew --prefix golang)/libexec"
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+export PATH="$PATH:${GOPATH}/bin"
+if ! command -v brew --prefix golang >/dev/null 2>&1; then
+  export GOROOT="$(brew --prefix golang)/libexec"
+  export PATH="$PATH:${GOROOT}/bin"
+fi
 
 # Erlang/Elixir
 export ERL_AFLAGS="-kernel shell_history enabled"
+
+# dotfiles repo
 alias config='git --git-dir=/Users/martin/.cfg/ --work-tree=/Users/martin'
