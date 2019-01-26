@@ -1,0 +1,15 @@
+antigen use oh-my-zsh
+antigen bundle asdf
+antigen bundle fzf
+antigen bundle aws
+antigen bundle mix
+if [[ "$OSTYPE" == darwin* ]]; then
+  antigen bundle osx
+fi
+antigen bundle sudo
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+antigen theme agnoster
+antigen theme https://github.com/iam4x/zsh-iterm-touchbar
+
+antigen apply
