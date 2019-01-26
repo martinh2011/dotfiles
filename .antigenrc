@@ -14,7 +14,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
   antigen theme agnoster
   antigen bundle osx
 else
-  antigen theme ys
+  antigen theme gallifrey
 fi
 
 if [ -d $HOME/.iterm2 ]; then
