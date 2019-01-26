@@ -77,4 +77,4 @@ fi
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # dotfiles repo
-alias config='git --git-dir=/Users/martin/.cfg/ --work-tree=/Users/martin'
+alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
