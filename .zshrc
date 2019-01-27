@@ -1,10 +1,8 @@
-zmodload zsh/zprof
-
 #
 # antigen
 #
 source ${HOME}/antigen/antigen.zsh
-antigen init .antigenrc
+antigen init ~/.antigenrc
 
 # homebrew zsh completions
 fpath=(/usr/local/share/zsh-completions $fpath)
