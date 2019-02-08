@@ -78,3 +78,8 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 # dotfiles repo
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+if [[ -d "/home/linuxbrew/" ]]; then
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+  PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+fi
