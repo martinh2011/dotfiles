@@ -82,6 +82,10 @@ export PATH=/usr/local/opt/go/libexec/bin:$PATH
 export PATH=$PATH:$GOPATH/bin
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 
+# configure prompt to not show username
+export DEFAULT_USER=$USER
+
+
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 test -e "${HOME}/.asdf/asf.sh" && source $HOME/.asdf/asdf.sh
