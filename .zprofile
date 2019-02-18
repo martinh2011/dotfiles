@@ -68,10 +68,6 @@ export GPG_TTY SSH_AUTH_SOCK
 # Go development
 export GOPATH="${HOME}/dev/go"
 export PATH="$PATH:${GOPATH}/bin"
-if command -v brew --prefix golang >/dev/null 2>&1; then
-  export GOROOT="$(brew --prefix golang)/libexec"
-  export PATH="$PATH:${GOROOT}/bin"
-fi
 
 # Erlang/Elixir
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -83,3 +79,51 @@ if [[ -d "/home/linuxbrew/" ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
   PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 fi
+
+# sourcetree
+alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
+
+# use ls color
+export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+
+# MS TFS client
+export TF_AUTO_SAVE_CREDENTIALS=1
+export TF_DIFF_COMMAND="bcomp %1 %2"
+
+# use local, non-root gem
+export GEM_HOME=$HOME/.gem
+
+# utf-8
+export LANG="en_US.UTF-8"
+export LC_COLLATE="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+
+# Don’t clear the screen after quitting a manual page
+export MANPAGER="less -X";
+
+
+#docker
+#export DOCKER_CONTENT_TRUST=1
+
+# docker version manager
+test -e $HOME/.dvm/dvm.sh && source $HOME/.dvm/dvm.sh > /dev/null
+
+# Android
+if [[ -d $HOME/Library/Android/sdk ]]; then
+  export ANDROID_HOME=$HOME/Library/Android/sdk
+  export ANDROID_NDK_HOME=$ANDROID_HOME/ndk-bundle
+  # android studio jdk
+  export STUDIO_JDK=/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/
+fi
+
+# configure prompt to not show username
+export DEFAULT_USER=$USER
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+#PATH 
+export PATH="/usr/local/git-tf:/usr/local/tee-clc:$PATH"
+export PATH=$GEM_HOME/bin:$PATH
+export PATH=~/bin:$PATH
+export PATH="/usr/local/opt/openssl/bin:$PATH"
