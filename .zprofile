@@ -5,6 +5,7 @@
 #
 [ -f ~/.profile ] && source ~/.profile
 
+alias ll='ls -GAlhp'
 #
 # Browser
 #
@@ -61,6 +62,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
   }
 fi
 
+gpgconf --launch gpg-agent
 GPG_TTY=$(/usr/bin/tty)
 SSH_AUTH_SOCK="$HOME/.gnupg/S.gpg-agent.ssh"
 export GPG_TTY SSH_AUTH_SOCK
@@ -127,3 +129,5 @@ export PATH="/usr/local/git-tf:/usr/local/tee-clc:$PATH"
 export PATH=$GEM_HOME/bin:$PATH
 export PATH=~/bin:$PATH
 export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH=$HOME/.dotnet/tools:$PATH
+
