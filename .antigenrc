@@ -9,6 +9,7 @@ antigen bundle aws
 antigen bundle mix
 antigen bundle sudo
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-completions
 
 if [[ "$OSTYPE" == darwin* ]]; then
   antigen theme agnoster
