@@ -91,6 +91,7 @@ export MANPAGER="less -X";
 
 #docker
 #export DOCKER_CONTENT_TRUST=1
+export DOCKER_BUILDKIT=1
 
 
 # configure prompt to not show username
