@@ -145,8 +145,6 @@ compctl -K _dotnet_zsh_complete dotnet
 
 alias ll='ls -GAlhp'
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
-alias -s log="tail -f"
 alias gs="git status"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -200,15 +198,6 @@ gt() {
     --preview 'git show --color=always {} | head -'$LINES
 }
 
-gh() {
-  is_in_git_repo || return
-  git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
-  fzf-down --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
-    --header 'Press CTRL-S to toggle sort' \
-    --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -'$LINES |
-  grep -o "[a-f0-9]\{7,\}"
-}
-
 gr() {
   is_in_git_repo || return
   git remote -v | awk '{print $1 "\t" $2}' | uniq |
@@ -237,3 +226,7 @@ unset -f bind-git-helper
 
 # openssl + ansible
 #export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/opt/openssl/lib:$DYLD_FALLBACK_LIBRARY_PATH
+
+if type "kubectl" > /dev/null; then
+  source <(kubectl completion zsh)
+fi
