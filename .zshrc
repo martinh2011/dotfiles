@@ -22,7 +22,7 @@ if [[ -z "$LANG" ]]; then
 fi
 
 
-export PATH=$PATH:/usr/local/bin:/usr/local/sbin
+export PATH=$PATH:$HOME/.local/bin/:/usr/local/bin:/usr/local/sbin
 
 
 if [[ "$OSTYPE" == darwin* ]]; then
@@ -32,11 +32,12 @@ if [[ "$OSTYPE" == darwin* ]]; then
 fi
 
 # gpg
-gpgconf --launch gpg-agent
-GPG_TTY=$(/usr/bin/tty)
-SSH_AUTH_SOCK="$HOME/.gnupg/S.gpg-agent.ssh"
-export GPG_TTY SSH_AUTH_SOCK
-
+if type "gpgconf" > /dev/null; then
+  gpgconf --launch gpg-agent
+  GPG_TTY=$(/usr/bin/tty)
+  SSH_AUTH_SOCK="$HOME/.gnupg/S.gpg-agent.ssh"
+  export GPG_TTY SSH_AUTH_SOCK
+fi
 
 
 export GOPATH="${HOME}/dev/go"
