@@ -15,7 +15,7 @@ antigen bundle docker-compose
 antigen bundle docker-machine
 
 if [[ "$OSTYPE" == darwin* ]]; then
-  antigen theme agnoster
+  antigen theme https://github.com/agnoster/agnoster-zsh-theme.git agnoster
   antigen bundle osx
 else
   antigen theme gallifrey
