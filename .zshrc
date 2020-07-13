@@ -164,3 +164,28 @@ if type "pyenv" > /dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
+# use secretive SSH agent if present
+test -e "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh" && export SSH_AUTH_SOCK=$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
+
+
+
+# use kube-ps1 prompt if present
+if [[ -e "/usr/local/opt/kube-ps1/share/kube-ps1.sh" ]]; then
+  source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+  
+  export KUBE_PS1_PREFIX="%F{black}("
+  export KUBE_PS1_SUFFIX="%F{black})"
+  export KUBE_PS1_SEPARATOR="%F{black}|"
+  export KUBE_PS1_DIVIDER="%F{black}:"
+  export KUBE_PS1_CTX_COLOR=190
+  export KUBE_PS1_NS_COLOR=88
+  export KUBE_PS1_SYMBOL_COLOR=231
+  prompt_kubecontext()
+  {
+    prompt_segment 'blue' 'black' "$(kube_ps1)"
+  }
+
+  PROMPT_SEGMENT_POSITION=2 PROMPT_SEGMENT_NAME="prompt_kubecontext";\
+  AGNOSTER_PROMPT_SEGMENTS=("${AGNOSTER_PROMPT_SEGMENTS[@]:0:$PROMPT_SEGMENT_POSITION-1}" "$PROMPT_SEGMENT_NAME" "${AGNOSTER_PROMPT_SEGMENTS[@]:$PROMPT_SEGMENT_POSITION-1}");\
+  unset PROMPT_SEGMENT_POSITION PROMPT_SEGMENT_NAME
+fi
