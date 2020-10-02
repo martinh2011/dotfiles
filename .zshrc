@@ -87,8 +87,6 @@ export MANPAGER="less -X";
 # configure prompt to not show username
 export DEFAULT_USER=$USER
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 #PATH 
 export PATH="/usr/local/git-tf:/usr/local/tee-clc:$PATH"
 export PATH=~/bin:$PATH
@@ -172,7 +170,7 @@ test -e "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/sock
 # use kube-ps1 prompt if present
 if [[ -e "/usr/local/opt/kube-ps1/share/kube-ps1.sh" ]]; then
   source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
-  
+
   export KUBE_PS1_PREFIX="%F{black}("
   export KUBE_PS1_SUFFIX="%F{black})"
   export KUBE_PS1_SEPARATOR="%F{black}|"
@@ -183,9 +181,23 @@ if [[ -e "/usr/local/opt/kube-ps1/share/kube-ps1.sh" ]]; then
   prompt_kubecontext()
   {
     prompt_segment 'blue' 'black' "$(kube_ps1)"
+
+#     #iterm user var
+#     printf "\033]1337;SetUserVar=%s=%s\007" kubectx "$(echo -n "$(_kube_ps1_symbol) $KUBE_PS1_CONTEXT|$KUBE_PS1_NAMESPACE" | base64)"
   }
 
   PROMPT_SEGMENT_POSITION=2 PROMPT_SEGMENT_NAME="prompt_kubecontext";\
   AGNOSTER_PROMPT_SEGMENTS=("${AGNOSTER_PROMPT_SEGMENTS[@]:0:$PROMPT_SEGMENT_POSITION-1}" "$PROMPT_SEGMENT_NAME" "${AGNOSTER_PROMPT_SEGMENTS[@]:$PROMPT_SEGMENT_POSITION-1}");\
   unset PROMPT_SEGMENT_POSITION PROMPT_SEGMENT_NAME
 fi
+
+
+if [[ -e "${HOME}/.iterm2_shell_integration.zsh" ]]; then
+  source "${HOME}/.iterm2_shell_integration.zsh"
+fi
+
+# minikube
+export MINIKUBE_HOME=/Volumes/SamsungT5/minikube
+
+# vagrant settings
+export VAGRANT_DEFAULT_PROVIDER=parallels
