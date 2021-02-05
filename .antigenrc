@@ -13,7 +13,6 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle docker
 antigen bundle docker-compose
 antigen bundle docker-machine
-antigen bundle zsh-users/zsh-autosuggestions --branch=master
 
 if [[ "$OSTYPE" == darwin* ]]; then
   antigen theme https://github.com/agnoster/agnoster-zsh-theme.git agnoster

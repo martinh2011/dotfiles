@@ -71,9 +71,6 @@ export TF_AUTO_SAVE_CREDENTIALS=1
 export TF_DIFF_COMMAND="bcomp %1 %2"
 
 
-export GEM_HOME=$HOME/.gem
-export PATH=$GEM_HOME/bin:$PATH
-
 
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X";
@@ -103,8 +100,9 @@ antigen init ~/.antigenrc
 
 # homebrew zsh completions
 # shellcheck disable=SC2206
-fpath=(/usr/local/share/zsh-completions $fpath)
-
+if type brew &>/dev/null; then
+  fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
+fi
 
 test -e "${HOME}/.asdf/asf.sh" && source "$HOME/.asdf/asdf.sh"
 test -e "$HOME/.asdf/completions/asdf.bash" &&. "$HOME/.asdf/completions/asdf.bash"
@@ -154,17 +152,8 @@ if [[ -d "/usr/local/opt/helm@2/bin" ]]; then
 fi
 
 
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-
-if type "pyenv" > /dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
 # use secretive SSH agent if present
 test -e "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh" && export SSH_AUTH_SOCK=$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
-
 
 
 # use kube-ps1 prompt if present
@@ -201,3 +190,6 @@ export MINIKUBE_HOME=/Volumes/SamsungT5/minikube
 
 # vagrant settings
 export VAGRANT_DEFAULT_PROVIDER=parallels
+
+# fastlane
+. "${HOME}/.fastlane/completions/completion.sh"
