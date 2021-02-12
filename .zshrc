@@ -192,4 +192,4 @@ export MINIKUBE_HOME=/Volumes/SamsungT5/minikube
 export VAGRANT_DEFAULT_PROVIDER=parallels
 
 # fastlane
-. "${HOME}/.fastlane/completions/completion.sh"
+test -e "${HOME}/.fastlane/completions/completion.sh" &&  . "${HOME}/.fastlane/completions/completion.sh"
