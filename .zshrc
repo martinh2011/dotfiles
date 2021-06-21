@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
+
 # shellcheck shell=bash
 # shellcheck disable=SC1090,SC1091
 
@@ -97,7 +104,6 @@ fi
 source "${HOME}/antigen/antigen.zsh"
 antigen init ~/.antigenrc
 
-
 # homebrew zsh completions
 # shellcheck disable=SC2206
 if type brew &>/dev/null; then
@@ -156,31 +162,6 @@ fi
 test -e "$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh" && export SSH_AUTH_SOCK=$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
 
 
-# use kube-ps1 prompt if present
-if [[ -e "/usr/local/opt/kube-ps1/share/kube-ps1.sh" ]]; then
-  source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
-
-  export KUBE_PS1_PREFIX="%F{black}("
-  export KUBE_PS1_SUFFIX="%F{black})"
-  export KUBE_PS1_SEPARATOR="%F{black}|"
-  export KUBE_PS1_DIVIDER="%F{black}:"
-  export KUBE_PS1_CTX_COLOR=190
-  export KUBE_PS1_NS_COLOR=88
-  export KUBE_PS1_SYMBOL_COLOR=231
-  prompt_kubecontext()
-  {
-    prompt_segment 'blue' 'black' "$(kube_ps1)"
-
-#     #iterm user var
-#     printf "\033]1337;SetUserVar=%s=%s\007" kubectx "$(echo -n "$(_kube_ps1_symbol) $KUBE_PS1_CONTEXT|$KUBE_PS1_NAMESPACE" | base64)"
-  }
-
-  PROMPT_SEGMENT_POSITION=2 PROMPT_SEGMENT_NAME="prompt_kubecontext";\
-  AGNOSTER_PROMPT_SEGMENTS=("${AGNOSTER_PROMPT_SEGMENTS[@]:0:$PROMPT_SEGMENT_POSITION-1}" "$PROMPT_SEGMENT_NAME" "${AGNOSTER_PROMPT_SEGMENTS[@]:$PROMPT_SEGMENT_POSITION-1}");\
-  unset PROMPT_SEGMENT_POSITION PROMPT_SEGMENT_NAME
-fi
-
-
 if [[ -e "${HOME}/.iterm2_shell_integration.zsh" ]]; then
   source "${HOME}/.iterm2_shell_integration.zsh"
 fi
@@ -193,3 +174,14 @@ export VAGRANT_DEFAULT_PROVIDER=parallels
 
 # fastlane
 test -e "${HOME}/.fastlane/completions/completion.sh" &&  . "${HOME}/.fastlane/completions/completion.sh"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Show prompt segment "kubecontext" only when the command you are typing
+# invokes kubectl, helm, kubens, kubectx, oc, istioctl, kogito, k9s or helmfile.
+typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubctx'export PATH="/usr/local/opt/curl/bin:$PATH"
+
+# Android SDK
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk/
+export PATH=$ANDROID_SDK_ROOT/platform-tools/:$PATH
