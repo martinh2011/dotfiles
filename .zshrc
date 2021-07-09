@@ -8,6 +8,8 @@
 # shellcheck shell=bash
 # shellcheck disable=SC1090,SC1091
 
+autoload -U +X bashcompinit && bashcompinit
+
 #
 # Browser
 #
@@ -104,6 +106,8 @@ fi
 source "${HOME}/antigen/antigen.zsh"
 antigen init ~/.antigenrc
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # homebrew zsh completions
 # shellcheck disable=SC2206
 if type brew &>/dev/null; then
@@ -122,6 +126,10 @@ zstyle :compinstall filename '/Users/martin/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+if type brew &>/dev/null && type az &>/dev/null; then
+  . "$(brew --prefix)/etc/bash_completion.d/az"
+fi
 
 _dotnet_zsh_complete() 
 {
@@ -181,6 +189,10 @@ test -e "${HOME}/.fastlane/completions/completion.sh" &&  . "${HOME}/.fastlane/c
 # Show prompt segment "kubecontext" only when the command you are typing
 # invokes kubectl, helm, kubens, kubectx, oc, istioctl, kogito, k9s or helmfile.
 typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubctx'export PATH="/usr/local/opt/curl/bin:$PATH"
+
+export GEM_HOME=$HOME/.gem
+export PATH=$GEM_HOME/bin:$PATHexport PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH=/$GEM_HOME/ruby/3.0.0/bin:$PATH
 
 # Android SDK
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk/
